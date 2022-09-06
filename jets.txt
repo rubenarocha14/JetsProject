@@ -1,0 +1,5 @@
+Fighter, F22 Raptor, 100,1000,100000
+Transport, C-130 Hercules,200,2000,200000
+Common, V-22 Osprey,300,3000,300000
+Common, B-1 Lancer,400,4000,400000
+Common, RC-135,500,5000,500000
