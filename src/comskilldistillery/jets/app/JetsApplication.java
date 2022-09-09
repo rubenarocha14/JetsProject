@@ -17,80 +17,64 @@ public class JetsApplication {
 	Airfield airfield1 = new Airfield(); // instantiate our object of our airfield
 	ArrayList<Jet> mainAirfield = airfield1.readFromFile(); // create an array list of Jet types named mainAirfield
 	// that holds the values of our jets from the Airfield method readFromFile();
-	// public static List<Jet> airfield = new ArrayList<Jet>();
 
-	public static void main(String[] args) { // main method
+	public static void main(String[] args) { // main methodj calls launch()
 
 		// create our JetsApplication instance
 		JetsApplication jets = new JetsApplication();
 		jets.launch();
 	}
 
-	private void launch() {
+	private void launch() {// method will call our display menu and menuOperations
 
 		displayMenu();
 		menuOperations(mainAirfield);
 	}
 
-	public void displayMenu() {
+	public void displayMenu() {//solely displays menu
 		System.out.println("Please select from the following menu");
 		System.out.println("|=======================================|");
 		System.out.println("\t 1) List the fleet");
 		System.out.println("\t 2) Fly all jets");
 		System.out.println("\t 3) View fastest jet");
 		System.out.println("\t 4) View jet with longest range");
-		System.out.println("\t 5) Load all Cargo Jets");
-		System.out.println("\t 6) Dogfight!");
+		System.out.println("\t 5) Load all Transport Jets");
+		System.out.println("\t 6) TopGun!");
 		System.out.println("\t 7) Add a jet to the fleet");
 		System.out.println("\t 8) Remove a jet from the fleet");
 		System.out.println("\t 9) Quit");
 		System.out.println("|=======================================|");
 	}
 
-	private void menuOperations(ArrayList<Jet> officialAirfield) {
+	private void menuOperations(ArrayList<Jet> officialAirfield) {//takes a users selection and performs the associated operation
 		// take the menu selection from the user
 		int selection = scan.nextInt();
 		// use switch statements to convert the users input into a method call
 		switch (selection) {
-		case 1:
-			// listFleet(ArrayList<Jet> getJets);
-			// initial list of jets should be read from a .txt file
+		case 1://list jets
 			System.out.println("Jets in the airfield: ");
-			// listFleet(mainAirfield);
 			listJets(officialAirfield);
 			break;
 
-		case 2:
-			// should utilize an overridden toString for each jet to display jet data and
-			// the distance util
-			// empty
+		case 2://displays all jet info in the airfield as well as their remaining flight time
 			System.out.println("Flying all jets: ");
 			fly(mainAirfield);
 			break;
 
-		case 3:
-			// determine the fastest jet in fleet
-			// let the first jet(i) in the list be assigned to a variable = fastestJet
-			// index through the list and if i<i+1 reassign fastestJet to i+1
-			// return fastestJet once the index has finished
+		case 3://idx thorugh for loop and use .getSpeed() to determine the fastest jet in the airfield
 			System.out.println("Fastest jet in the airfield is: ");
 			getFastestJet(mainAirfield);
 			break;
-		case 4:
-			// determine the jet with the longest range in the fleet
-			// let the first jet(i) in the list be assigned to a variable = distanceJet
-			// index through the list and if i<i+1 reassign distanceJet to i+1
-			// return distanceJet once the index has finished
+		case 4://idx through for loop and use .getRange() to determine the distance jet in the airfield
 			System.out.println("Jet with the longest range in the airfield is: ");
 			getLongestRange(mainAirfield);
 			break;
 		case 5:
-			// simulate loadCargo for all jets that are instanceOf
-			// System.out.println("Loading all Cargo: ");
+			// simulate loadCargo for all jets that are instanceOf TransportJet
 			loadUp(mainAirfield);
 			break;
 		case 6:
-			// simulate dogfight for all jets that are instanceOf
+			// simulate dogFight() for all jets that are instanceOf FighterJet
 			dogFight();
 			break;
 		case 7:
@@ -211,17 +195,17 @@ public class JetsApplication {
 	}
 
 	private void addCreatedJet(ArrayList<Jet> mainAirfield) {
-		mainAirfield.add(createNewJet());
+		mainAirfield.add(createNewJet());//adds return value of createNewJet() to the fleet
 	}
 
 	private Jet createNewJet() {
-		createJetMenu();
-		Jet createdJet = createJetOperations();
+		createJetMenu();//displays submenu to user
+		Jet createdJet = createJetOperations(); // returns the createdJet from createJetOperations
 		return createdJet;
 		
 	}
 
-	private void createJetMenu() {
+	private void createJetMenu() {//displays menu
 		System.out.println("What type of jet would you like to create?");
 		System.out.println("1) Common");
 		System.out.println("2) Fighter");
@@ -229,7 +213,7 @@ public class JetsApplication {
 		System.out.println("4) Quit");
 	}
 
-	private Jet createJetOperations() {
+	private Jet createJetOperations() {//takes jet info from users and creats new Jet 
 		int selection = scan.nextInt();
 		if(selection == 4) {
 			quitApp();
@@ -266,14 +250,12 @@ public class JetsApplication {
 			System.out.println("Please choose a valid number ( 1-3");
 
 
-
-
 	}
 		return userCreated;
 
 	}
 
-	private void removeJet(ArrayList<Jet> mainAirfield) {
+	private void removeJet(ArrayList<Jet> mainAirfield) {//removes a jet from the ArrayList
 		System.out.println("Please select the jet you'd like to remove. Select \n"
 				+ "by entering the position the jet resides in the list. The first jet \n"
 				+ "in the list would be 0, and the last jet would be the size of the list -1.");

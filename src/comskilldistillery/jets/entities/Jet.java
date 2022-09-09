@@ -20,9 +20,6 @@ public abstract class Jet {
 	}
 
 	// create our arg ctor with the class fields.
-	// currently have the type of jet as a object param, but it should be read from
-	// the
-	// txt file and used to construct that type of jet rather than be a field
 	public Jet(String type, String model, double speed, int range, long purchasePrice) {
 		this.type = type;
 		this.model = model;
@@ -31,7 +28,7 @@ public abstract class Jet {
 		this.purchasePrice = purchasePrice;
 	}
 
-	// create getters and setters for private fields in class
+	// create getters for private fields in class. User shouldn't be able to set outside of ctor
 	public String getType() {
 		return type;
 	}
@@ -59,12 +56,4 @@ public abstract class Jet {
 				+ "\n  purchasePrice:  s" + purchasePrice + "\n";
 	}
 
-	// create a fly method that is able to be overridden by subclasses
-	// this method should print out all of the toString info with the
-	// addition of the time a jet can fly until running out of fuel
-	public void fly() {
-		// should list all info of each plane as well as give the ...
-		// ...amt of time the plane can fly until it runs out of fuel
-
-	}
 }

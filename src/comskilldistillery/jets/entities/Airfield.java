@@ -7,21 +7,6 @@ import java.util.ArrayList;
 
 public class Airfield {
 
-	// declare a list of Jets named airfield
-
-//	public List<Jet> airfield = new ArrayList<>();
-
-	// my airfield should keep a list of jets in the airfield at any given time
-	// the original list of jets should be read from a .txt file
-	// the airfield list should be modified each time the user selects to add or
-	// remove a
-	// jet. The user should be able to select which jet they want to remove (can be
-	// in the middle
-	// of the list)
-
-	// is reading from file, but skips the first line for some reason
-	// had to enter an empty line in the txt file to get it to read the first entry
-	
 	
 	public ArrayList<Jet> readFromFile() {//create a readFromFile method class inside of Airfield Class to read txt file
 		ArrayList<Jet> airfield = new ArrayList<>();//create new ArrayList named airfield
