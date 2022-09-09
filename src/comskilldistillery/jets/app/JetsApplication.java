@@ -38,12 +38,12 @@ public class JetsApplication {
 		System.out.println("\t 1) List the fleet");
 		System.out.println("\t 2) Fly all jets");
 		System.out.println("\t 3) View fastest jet");
-		System.out.println("\t 4)View jet with longest range");
+		System.out.println("\t 4) View jet with longest range");
 		System.out.println("\t 5) Load all Cargo Jets");
-		System.out.println("\t 6)Dogfight!");
-		System.out.println("\t 7)Add a jet to the fleet");
-		System.out.println("\t 8)Remove a jet from the fleet");
-		System.out.println("\t 9)Quit");
+		System.out.println("\t 6) Dogfight!");
+		System.out.println("\t 7) Add a jet to the fleet");
+		System.out.println("\t 8) Remove a jet from the fleet");
+		System.out.println("\t 9) Quit");
 		System.out.println("|=======================================|");
 	}
 
@@ -87,7 +87,7 @@ public class JetsApplication {
 		case 5:
 			// simulate loadCargo for all jets that are instanceOf
 			// System.out.println("Loading all Cargo: ");
-			loadCargo(mainAirfield);
+			loadUp(mainAirfield);
 			break;
 		case 6:
 			// simulate dogfight for all jets that are instanceOf
@@ -127,7 +127,7 @@ public class JetsApplication {
 		for (int i = 0; i < jetsToBeFlown.size(); i++) {
 			int jetRange = jetsToBeFlown.get(i).getRange();
 			double jetSpeed = jetsToBeFlown.get(i).getSpeed();
-			flightTime = Math.round((jetRange / jetSpeed)*100.00)/100.00;
+			flightTime = Math.round((jetRange / jetSpeed) * 100.00) / 100.00;
 			// should print out each Jets toString and amount of fly time
 			System.out.println(jetsToBeFlown.get(i) + "  Flight Time Remaining : " + flightTime + " hours");
 		}
@@ -138,13 +138,11 @@ public class JetsApplication {
 		// Jet distanceJet = mainAirfield.get(0);
 		Jet distanceJet = mainAirfield.get(0);
 		Jet nextDistanceJet = null;
-		int range = 0;
 		for (int i = 0; i < mainAirfield.size(); i++) {
 			nextDistanceJet = mainAirfield.get(i);
 
 			if (distanceJet.getRange() < nextDistanceJet.getRange()) {
 				distanceJet = nextDistanceJet;
-				range = distanceJet.getRange();
 			} else {
 				continue;
 			}
@@ -157,19 +155,21 @@ public class JetsApplication {
 		// TODO Auto-generated method stub
 		Jet fastestJet = mainAirfield.get(0);
 		Jet nextFastestJet = null;
-		double speed = 0;
+		double mach = 0;
 		for (int i = 0; i < mainAirfield.size(); i++) {
 			nextFastestJet = mainAirfield.get(i);
 
 			if (fastestJet.getSpeed() < nextFastestJet.getSpeed()) {
 				fastestJet = nextFastestJet;
-				speed = fastestJet.getSpeed();
 			} else {
 				continue;
 
 			}
 		}
-		System.out.println("Jet with the fastest top speed is: " + fastestJet );
+		System.out.println("Jet with the fastest top speed in MPH: " + fastestJet);
+		mach = fastestJet.getSpeed() / 767.3;
+		System.out.println("Top Speed in Mach : " + mach);
+		System.out.println();
 
 	}
 
@@ -193,7 +193,7 @@ public class JetsApplication {
 		// if no fighter types found return "no fighter jets in the fleet to fight!"
 	}
 
-	private void loadCargo(ArrayList<Jet> mainAirfield) {
+	private void loadUp(ArrayList<Jet> mainAirfield) {
 		// should have all cargo type jets call their overridden method fightMode();
 		// should iterate through the list and check if jet is an instacne of Transport
 		// Jet
@@ -208,11 +208,6 @@ public class JetsApplication {
 				continue;
 			}
 		}
-		// call loadUp()
-		// else continue
-
-		// if no cargo jets found, return "no cargo jets available for resupply
-		// mission!"
 	}
 
 	private void addCreatedJet(ArrayList<Jet> mainAirfield) {
@@ -220,40 +215,60 @@ public class JetsApplication {
 	}
 
 	private Jet createNewJet() {
-		Jet userCreated = null;
-		System.out.println("What type of jet would you like to add to the fleet?\n"
-				+ "Enter: Transport, Common, or Fighter. \nEnter \"quit\" to exit the App");
-		String jetType = scan.next(); 
-		if (jetType.equalsIgnoreCase("Transport") || jetType.equalsIgnoreCase("Common")
-				|| jetType.equalsIgnoreCase("Fighter")) {
-			if(jetType.equalsIgnoreCase("quit")) {
-				quitApp();
-			}
+		createJetMenu();
+		Jet createdJet = createJetOperations();
+		return createdJet;
+		
+	}
 
-			System.out.println("What model is the jet?");
-			String jetModel = scan.next();
-			System.out.println("What top speed of the jet?");
-			String jetSpeed = scan.next();
-			double jetSpd = Double.parseDouble(jetSpeed);
-			System.out.println("What is the range of the jet?");
-			String jetRange = scan.next();
-			int jetRng = Integer.parseInt(jetRange);
-			System.out.println("What purchase price of the jet?");
-			String jetPrice = scan.next();
-			long jetCost = Long.parseLong(jetPrice);
-			if (jetType.equalsIgnoreCase("Transport")) {
-				userCreated = new TransportJet(jetType, jetModel, jetSpd, jetRng, jetCost);
-			} else if (jetType.equalsIgnoreCase("Fighter")) {
-				userCreated = new FighterJet(jetType, jetModel, jetSpd, jetRng, jetCost);
-			} else {
-				userCreated = new CommonJet(jetType, jetModel, jetSpd, jetRng, jetCost);
-			}
-		} else {
-			System.out.println("Invalid jet type -- Exiting App");
-			System.exit(0);
+	private void createJetMenu() {
+		System.out.println("What type of jet would you like to create?");
+		System.out.println("1) Common");
+		System.out.println("2) Fighter");
+		System.out.println("3) Transport");
+		System.out.println("4) Quit");
+	}
 
+	private Jet createJetOperations() {
+		int selection = scan.nextInt();
+		if(selection == 4) {
+			quitApp();
 		}
+		Jet userCreated = null;
 
+		String jetType;
+		System.out.println("What model is the jet?");
+		String jetModel = scan.next();
+		System.out.println("What top speed of the jet?");
+		String jetSpeed = scan.next();
+		double jetSpd = Double.parseDouble(jetSpeed);
+		System.out.println("What is the range of the jet?");
+		String jetRange = scan.next();
+		int jetRng = Integer.parseInt(jetRange);
+		System.out.println("What purchase price of the jet?");
+		String jetPrice = scan.next();
+		long jetCost = Long.parseLong(jetPrice);
+		switch (selection) {
+
+		case 1:
+			jetType = "Common";
+			userCreated = new CommonJet(jetType, jetModel, jetSpd, jetRng, jetCost);
+			break;
+		case 2:
+			jetType = "Fighter";
+			userCreated = new FighterJet(jetType, jetModel, jetSpd, jetRng, jetCost);
+			break;
+		case 3:
+			jetType = "Transport";
+			userCreated = new TransportJet(jetType, jetModel, jetSpd, jetRng, jetCost);
+			break;
+		default:
+			System.out.println("Please choose a valid number ( 1-3");
+
+
+
+
+	}
 		return userCreated;
 
 	}
