@@ -1,6 +1,9 @@
 package comskilldistillery.jets.entities;
 
 public class CommonJet extends Jet {
+	public CommonJet() {
+		
+	}
 	public CommonJet(String type, String model, double speed, int range, long purchasePrice) {
 		this.type = type;
 		this.model = model;
@@ -11,8 +14,8 @@ public class CommonJet extends Jet {
 	
 	@Override
 	public String toString() {
-		return "Jet [type=" + getType() + ", model=" + getModel() + ", speed=" + getSpeed() + ", range=" + getRange() + ", purchasePrice="
-				+ getPurchasePrice() + "]";
+		return "Jet Type: " + type + "\n  Model: " + model + "\n  Speed: " + speed + "\n  Range: " + range + "\n  Purchase Price: "
+				+ purchasePrice + "\n";
 		
 	}
 }

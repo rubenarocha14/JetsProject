@@ -1,6 +1,9 @@
 package comskilldistillery.jets.entities;
 
 public class TransportJet extends Jet implements transportCargo {
+	public TransportJet() {
+		
+	}
 	public TransportJet(String type, String model, double speed, int range, long purchasePrice) {
 		this.type = type;
 		this.model = model;
@@ -14,14 +17,15 @@ public class TransportJet extends Jet implements transportCargo {
 	
 	@Override
 	public String toString() {
-		return "Jet [type=" + getType() + ", model=" + getModel() + ", speed=" + getSpeed() + ", range=" + getRange() + ", purchasePrice="
-				+ getPurchasePrice() + "]";
+		return "Jet Type: " + type + "\n  Model: " + model + "\n  Speed: " + speed + "\n  Range: " + range + "\n  Purchase Price: "
+				+ purchasePrice + "\n";
 		
 	}
 
 	@Override
 	public void loadUp() {
-		System.out.println("Engaging Bogie... pewpewpew!!!");
+		System.out.println(getType() + " " + getModel() + " Loading Cargo...");
+		System.out.println("Loading Complete... Supply Drop Inbound!!!");
 	}
 
 }

@@ -75,8 +75,8 @@ public abstract class Jet {
 	//create a toString able to be overridden by subclasses
 	@Override
 	public String toString() {
-		return "Jet [type=" + type + ", model=" + model + ", speed=" + speed + ", range=" + range + ", purchasePrice="
-		+ purchasePrice + "]";
+		return "Jet Type: " + type + "\n  Model: " + model + "\n  Speed: " + speed + "\n range: " + range + "\n  purchasePrice:  s"
+		+ purchasePrice + "\n";
 	}
 	//create a fly method that is able to be overridden by subclasses
 	//this method should print out all of the toString info with the 
